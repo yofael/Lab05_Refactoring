@@ -5,13 +5,11 @@
 
 using std::ostringstream;
 using std::vector;
-
 using namespace std;
 
 string Customer::statement()
 {
     double totalAmount = 0;
-    int frequentRenterPoints = 0;
     vector< Rental >::iterator iter = _rentals.begin();
     vector< Rental >::iterator iter_end = _rentals.end();
     ostringstream result;

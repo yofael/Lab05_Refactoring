@@ -37,7 +37,7 @@ endif()
 # Trivial example using gtest and gmock
 add_executable(main src/main.cpp
         src/Customer.cpp
-        src/Movie.cpp src_test/testCustomer.cpp)
+        src/Movie.cpp)
 
 add_executable(mesTests src_test/testCustomer.cpp
         src/Customer.cpp
