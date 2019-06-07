@@ -12,9 +12,9 @@ public:
     Customer();
     explicit Customer( std::string  name );
 
-    void addRental( const Rental& arg );
-    std::string getName() const;
-    std::string statement();
+    virtual void addRental( const Rental& arg );
+    virtual std::string getName() const;
+    virtual std::string statement();
 
 private:
     int frequentRenterPoints;

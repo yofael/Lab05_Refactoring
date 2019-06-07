@@ -11,6 +11,7 @@
 class New_Release : public Movie {
 
 public:
+    New_Release();
     New_Release(const std::string& title);
     static const int NEW_RELEASE = 1;
     void incrementPrice(double& thisAmount, int dayOfRental) const;
@@ -22,6 +23,12 @@ inline  New_Release::
 New_Release(const std::string &title)
         : Movie(title)
 {}
+
+
+inline  New_Release::
+New_Release()
+{}
+
 
 inline void New_Release::
 incrementPrice(double& thisAmount, int dayOfRental) const {

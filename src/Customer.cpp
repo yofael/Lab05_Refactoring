@@ -18,12 +18,9 @@ string Customer::statement()
         double thisAmount = 0;
         Rental each = *iter;
 
-
         each.getMovie()->incrementPrice(thisAmount, each.getDaysRented());
-
         // add frequent renter points
         frequentRenterPoints++;
-
         // add bonus for a two day new release rental
         each.getMovie()->incrementFrequentRenterPoint(frequentRenterPoints);
 

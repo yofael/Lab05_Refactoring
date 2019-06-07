@@ -10,6 +10,7 @@
 class Childrens : public Movie {
 
 public:
+    Childrens();
     Childrens(const std::string& title);
     static const int CHILDRENS   = 2;
     void incrementPrice(double& thisAmount, int dayOfRental) const;
@@ -19,6 +20,11 @@ public:
 inline  Childrens::
 Childrens(const std::string &title)
 : Movie(title)
+{}
+
+
+inline  Childrens::
+Childrens()
 {}
 
 

@@ -11,6 +11,8 @@
 class Regular : public Movie {
 
 public:
+    Regular();
+
     Regular(const std::string& title);
     static const int REGULAR     = 0;
     void incrementPrice(double& thisAmount, int dayOfRental) const;
@@ -21,7 +23,9 @@ Regular(const std::string &title)
 : Movie(title)
 {}
 
-
+inline  Regular::
+Regular()
+{}
 inline void Regular::
 incrementPrice(double& thisAmount, int dayOfRental ) const {
     thisAmount += 2;
