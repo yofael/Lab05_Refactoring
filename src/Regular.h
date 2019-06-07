@@ -7,14 +7,13 @@
 
 
 #include "Movie.h"
-#include "Rental.h"
 
 class Regular : public Movie {
 
 public:
     Regular(const std::string& title);
     static const int REGULAR     = 0;
-    void incrementPrice(double& thisAmount, Rental* each) const;
+    void incrementPrice(double& thisAmount, int dayOfRental) const;
 };
 
 inline  Regular::
@@ -24,10 +23,10 @@ Regular(const std::string &title)
 
 
 inline void Regular::
-incrementPrice(double& thisAmount, Rental* each ) const {
+incrementPrice(double& thisAmount, int dayOfRental ) const {
     thisAmount += 2;
-    if ( each->getDaysRented() > 2 )
-        thisAmount += ( each->getDaysRented() - 2 ) * 1.5 ;
+    if ( dayOfRental > 2 )
+        thisAmount += ( dayOfRental - 2 ) * 1.5 ;
 }
 
 #endif //LAB05_REGULAR_H

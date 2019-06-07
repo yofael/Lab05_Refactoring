@@ -20,8 +20,6 @@ TEST(CustomsTest, essai) {
 
     const char* s1 = customer.statement().c_str();
 
-    std::cout << s1 << std::endl;
-/*
     const char* s3 = "Rental Record for Olivier\n"
                      "\tKarate Kid\t9.5\n"
                      "\tAvengers: Endgame\t15\n"
@@ -29,5 +27,5 @@ TEST(CustomsTest, essai) {
                      "Amount owed is 26\n"
                      "You earned 4 frequent renter points";
 
-    ASSERT_STREQ(s1, s3);*/
+    ASSERT_STREQ(s1, s3);
 }

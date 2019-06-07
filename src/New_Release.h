@@ -7,14 +7,15 @@
 
 
 #include "Movie.h"
-#include "Rental.h"
 
 class New_Release : public Movie {
 
 public:
     New_Release(const std::string& title);
     static const int NEW_RELEASE = 1;
-    void incrementPrice(double& thisAmount, Rental* each) const;
+    void incrementPrice(double& thisAmount, int dayOfRental) const;
+    void incrementFrequentRenterPoint(int& frp) const;
+
 };
 
 inline  New_Release::
@@ -23,8 +24,12 @@ New_Release(const std::string &title)
 {}
 
 inline void New_Release::
-incrementPrice(double& thisAmount, Rental* each) const {
-    thisAmount += each->getDaysRented() * 3;
+incrementPrice(double& thisAmount, int dayOfRental) const {
+    thisAmount += dayOfRental * 3;
 }
 
+inline void New_Release::
+incrementFrequentRenterPoint(int &frp) const {
+    frp++;
+}
 #endif //LAB05_NEW_RELEASE_H

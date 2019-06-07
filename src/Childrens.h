@@ -5,16 +5,14 @@
 #ifndef LAB05_CHILDRENS_H
 #define LAB05_CHILDRENS_H
 
-
 #include "Movie.h"
-#include "Rental.h"
 
 class Childrens : public Movie {
 
 public:
     Childrens(const std::string& title);
     static const int CHILDRENS   = 2;
-    void incrementPrice(double& thisAmount, Rental* each) const;
+    void incrementPrice(double& thisAmount, int dayOfRental) const;
 
 };
 
@@ -25,10 +23,10 @@ Childrens(const std::string &title)
 
 
 inline void Childrens::
-incrementPrice(double& thisAmount, Rental* each) const {
+incrementPrice(double& thisAmount, int dayOfRental) const {
     thisAmount += 1.5;
-    if ( each->getDaysRented() > 3 )
-        thisAmount += ( each->getDaysRented() - 3 ) * 1.5;
+    if ( dayOfRental > 3 )
+        thisAmount += ( dayOfRental - 3 ) * 1.5;
 }
 
 #endif //LAB05_CHILDRENS_H
