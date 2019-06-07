@@ -37,10 +37,10 @@ endif()
 # Trivial example using gtest and gmock
 add_executable(main src/main.cpp
         src/Customer.cpp
-        src/Movie.cpp)
+        src/Regular.cpp src/Regular.h src/New_Release.cpp src/New_Release.h src/Childrens.cpp src/Childrens.h)
 
 add_executable(mesTests src_test/testCustomer.cpp
         src/Customer.cpp
-        src/Movie.cpp src_test/testCustomer.cpp)
+        src_test/testCustomer.cpp)
 target_link_libraries(mesTests gtest gmock_main)
 add_test(NAME example_test COMMAND mesTests)
