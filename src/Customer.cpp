@@ -9,29 +9,25 @@ using namespace std;
 
 string Customer::statement()
 {
-    double totalAmount = 0;
     vector< Rental >::iterator iter = _rentals.begin();
     vector< Rental >::iterator iter_end = _rentals.end();
     ostringstream result;
     result << "Rental Record for " << getName() << "\n";
     for ( ; iter != iter_end; ++iter ) {
-        double thisAmount = 0;
         Rental each = *iter;
 
-        each.getMovie()->incrementPrice(thisAmount, each.getDaysRented());
-        // add frequent renter points
-        frequentRenterPoints++;
         // add bonus for a two day new release rental
         each.getMovie()->incrementFrequentRenterPoint(frequentRenterPoints);
 
         // show figures for this rental
-        result << "\t" << each.getMovie()->getTitle() << "\t"
-               << thisAmount << "\n";
-        totalAmount += thisAmount;
+        each.getMovie()->afficher(result, amount, each.getDaysRented());
     }
     // add footer lines
-    result << "Amount owed is " << totalAmount << "\n";
-    result << "You earned " << frequentRenterPoints
-           << " frequent renter points";
-    return result.str();
+    return this->afficher(result).str();
+}
+
+
+std::ostringstream& Customer::afficher(std::ostringstream& out) {
+    out << "Amount owed is " << amount << "\n" << "You earned " << frequentRenterPoints << " frequent renter points";
+    return out;
 }

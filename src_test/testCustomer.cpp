@@ -13,31 +13,21 @@
 #include "../src/New_Release.h"
 #include "../src/Regular.h"
 
-class MockCustomer : public Customer {
-public:
-    MOCK_METHOD1(addRental, void(const Rental& arg));
-    MOCK_CONST_METHOD0(getName, std::string());
-    MOCK_METHOD0(statement, std::string());
-};
-
 class MockMovieRegular : public Regular {
 public:
-    MOCK_CONST_METHOD2(incrementPrice, void(double& thisAmount, int dayOfRental));
+    MOCK_CONST_METHOD2(incrementPrice, double(double& thisAmount, int dayOfRental));
     MOCK_CONST_METHOD1(incrementFrequentRenterPoint, void(int& frp));
-    MOCK_CONST_METHOD0(getTitle, std::string());
 };
 
 class MockMovieNewRelease : public New_Release {
 public:
-    MOCK_CONST_METHOD2(incrementPrice, void(double& thisAmount, int dayOfRental));
+    MOCK_CONST_METHOD2(incrementPrice, double(double& thisAmount, int dayOfRental));
     MOCK_CONST_METHOD1(incrementFrequentRenterPoint, void(int& frp));
-    MOCK_CONST_METHOD0(getTitle, std::string());
 };
 class MockMovieChildrens : public Childrens {
 public:
-    MOCK_CONST_METHOD2(incrementPrice, void(double& thisAmount, int dayOfRental));
+    MOCK_CONST_METHOD2(incrementPrice, double(double& thisAmount, int dayOfRental));
     MOCK_CONST_METHOD1(incrementFrequentRenterPoint, void(int& frp));
-    MOCK_CONST_METHOD0(getTitle, std::string());
 };
 TEST(CustomsTest, TestDeStatement) {
     Customer customer("Olivier");
@@ -54,6 +44,7 @@ TEST(CustomsTest, TestDeStatement) {
                      "Amount owed is 26\n"
                      "You earned 4 frequent renter points";
 
+    std::cout << s1 << std::endl << s3 << std::endl;
     ASSERT_STREQ(s1, s3);
 }
 
@@ -77,15 +68,6 @@ TEST(CustomsTest, TestDeRegularIncrementFRP) {
     c.statement();
 }
 
-TEST(CustomsTest, TestDeRegularGetTitle) {
-    MockMovieRegular mm;
-    EXPECT_CALL(mm, getTitle()).Times(testing::AtLeast(3));
-    Customer c("Olivier");
-    c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.statement();
-}
 
 TEST(CustomsTest, TestDeNewReleaseIncrementPrice) {
     MockMovieNewRelease mm;
@@ -107,16 +89,6 @@ TEST(CustomsTest, TestDeNewReleaseIncrementFRP) {
     c.statement();
 }
 
-TEST(CustomsTest, TestDeNewReleaseGetTitle) {
-    MockMovieNewRelease mm;
-    EXPECT_CALL(mm, getTitle()).Times(testing::AtLeast(3));
-    Customer c("Olivier");
-    c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.statement();
-}
-
 TEST(CustomsTest, TestDeChildrensIncrementPrice) {
     MockMovieChildrens mm;
     EXPECT_CALL(mm, incrementPrice(testing::_, testing::_)).Times(testing::AtLeast(1));
@@ -131,16 +103,6 @@ TEST(CustomsTest, TestDeChildrensIncrementFRP) {
     Customer c("Olivier");
     c.addRental(Rental(&mm, 7));
     c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.addRental(Rental(&mm, 7));
-    c.statement();
-}
-
-TEST(CustomsTest, TestDeChildrensGetTitle) {
-    MockMovieChildrens mm;
-    EXPECT_CALL(mm, getTitle()).Times(testing::AtLeast(3));
-    Customer c("Olivier");
     c.addRental(Rental(&mm, 7));
     c.addRental(Rental(&mm, 7));
     c.addRental(Rental(&mm, 7));

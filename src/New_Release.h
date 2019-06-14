@@ -14,7 +14,7 @@ public:
     New_Release();
     New_Release(const std::string& title);
     static const int NEW_RELEASE = 1;
-    void incrementPrice(double& thisAmount, int dayOfRental) const;
+    double incrementPrice(double& amount, int dayOfRental) const;
     void incrementFrequentRenterPoint(int& frp) const;
 
 };
@@ -30,13 +30,14 @@ New_Release()
 {}
 
 
-inline void New_Release::
-incrementPrice(double& thisAmount, int dayOfRental) const {
-    thisAmount += dayOfRental * 3;
+inline double New_Release::
+incrementPrice(double& amount, int dayOfRental) const {
+    amount += dayOfRental * 3;
+    return dayOfRental * 3;
 }
 
 inline void New_Release::
 incrementFrequentRenterPoint(int &frp) const {
-    frp++;
+    frp+=2;
 }
 #endif //LAB05_NEW_RELEASE_H

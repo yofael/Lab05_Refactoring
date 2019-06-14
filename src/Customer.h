@@ -11,16 +11,15 @@ class Customer {
 public:
     Customer();
     explicit Customer( std::string  name );
-
     virtual void addRental( const Rental& arg );
     virtual std::string getName() const;
     virtual std::string statement();
-
+    std::ostringstream& afficher(std::ostringstream& out);
 private:
     int frequentRenterPoints;
     std::string _name;
     std::vector< Rental > _rentals;
-
+    double amount = 0;
 };
 
 inline Customer::

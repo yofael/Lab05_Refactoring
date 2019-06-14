@@ -8,10 +8,9 @@ class Movie {
 public:
     Movie(const std::string &);
     Movie();
-    virtual void incrementPrice(double& thisAmount, int dayOfRental) const = 0;
+    virtual double incrementPrice(double& amount, int dayOfRental) const = 0;
     virtual void incrementFrequentRenterPoint(int& frp) const;
-    virtual std::string getTitle() const;
-
+    std::ostringstream & afficher(std::ostringstream& out, double& amount, int daysRental) const;
 private:
     std::string _title;
 };
@@ -25,9 +24,12 @@ Movie(const std::string& title)
 {}
 inline void Movie::
 incrementFrequentRenterPoint(int &frp) const {
-
+    ++frp;
 }
-inline std::string Movie::
-getTitle() const { return _title; }
 
+inline std::ostringstream& Movie::afficher(std::ostringstream& out, double& amount, int daysRental) const {
+    out << "\t" << _title << "\t"
+            << incrementPrice(amount, daysRental) << "\n";
+    return out;
+}
 #endif // MOVIE_H

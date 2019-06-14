@@ -15,7 +15,7 @@ public:
 
     Regular(const std::string& title);
     static const int REGULAR     = 0;
-    void incrementPrice(double& thisAmount, int dayOfRental) const;
+    double incrementPrice(double& amount, int dayOfRental) const;
 };
 
 inline  Regular::
@@ -26,11 +26,13 @@ Regular(const std::string &title)
 inline  Regular::
 Regular()
 {}
-inline void Regular::
-incrementPrice(double& thisAmount, int dayOfRental ) const {
-    thisAmount += 2;
+inline double Regular::
+incrementPrice(double& amount, int dayOfRental ) const {
+    double thisAmount = 2;
     if ( dayOfRental > 2 )
         thisAmount += ( dayOfRental - 2 ) * 1.5 ;
+    amount += thisAmount;
+    return thisAmount;
 }
 
 #endif //LAB05_REGULAR_H

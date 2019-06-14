@@ -13,7 +13,7 @@ public:
     Childrens();
     Childrens(const std::string& title);
     static const int CHILDRENS   = 2;
-    void incrementPrice(double& thisAmount, int dayOfRental) const;
+    double incrementPrice(double& amount, int dayOfRental) const;
 
 };
 
@@ -28,11 +28,13 @@ Childrens()
 {}
 
 
-inline void Childrens::
-incrementPrice(double& thisAmount, int dayOfRental) const {
-    thisAmount += 1.5;
+inline double Childrens::
+incrementPrice(double& amount, int dayOfRental) const {
+    double thisAmount = 1.5;
     if ( dayOfRental > 3 )
         thisAmount += ( dayOfRental - 3 ) * 1.5;
+    amount += thisAmount;
+    return thisAmount;
 }
 
 #endif //LAB05_CHILDRENS_H
