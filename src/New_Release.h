@@ -12,32 +12,33 @@ class New_Release : public Movie {
 
 public:
     New_Release();
-    New_Release(const std::string& title);
-    static const int NEW_RELEASE = 1;
-    double incrementPrice(double& amount, int dayOfRental) const;
-    void incrementFrequentRenterPoint(int& frp) const;
+
+    New_Release(const std::string &title);
+
+    double incrementPrice(double &amount, int dayOfRental) const;
+
+    void incrementFrequentRenterPoint(int &frp) const;
 
 };
 
 inline  New_Release::
 New_Release(const std::string &title)
-        : Movie(title)
-{}
+        : Movie(title) {}
 
 
 inline  New_Release::
-New_Release()
-{}
+New_Release() {}
 
 
 inline double New_Release::
-incrementPrice(double& amount, int dayOfRental) const {
+incrementPrice(double &amount, int dayOfRental) const {
     amount += dayOfRental * 3;
     return dayOfRental * 3;
 }
 
 inline void New_Release::
 incrementFrequentRenterPoint(int &frp) const {
-    frp+=2;
+    frp += 2;
 }
+
 #endif //LAB05_NEW_RELEASE_H

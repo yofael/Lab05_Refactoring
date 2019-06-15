@@ -12,9 +12,7 @@ class Regular : public Movie {
 
 public:
     Regular();
-
     Regular(const std::string& title);
-    static const int REGULAR     = 0;
     double incrementPrice(double& amount, int dayOfRental) const;
 };
 
