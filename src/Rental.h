@@ -1,29 +1,35 @@
 // Rental.h
 #ifndef RENTAL_H
 #define RENTAL_H
+
 #include "Movie.h"
 
 class Rental {
 public:
-    Rental( const Movie& movie, int daysRented );
+    Rental();
 
-    int getDaysRented() const;
-    const Movie& getMovie() const;
+    Rental(const Movie *movie, int daysRented);
+
+    std::ostream &applicateBonusAndCalculatePrice(std::ostream &result, int &frp, double &amount);
 
 private:
-    Movie _movie;
+    const Movie *_movie;
     int _daysRented;
 };
 
+
 inline Rental::
-Rental( const Movie& movie, int daysRented )
-        : _movie( movie )
-        , _daysRented( daysRented ) {}
+Rental() {}
 
-inline int Rental::
-getDaysRented() const { return _daysRented; }
+inline Rental::
+Rental(const Movie *movie, int daysRented)
+        : _movie(movie), _daysRented(daysRented) {}
 
-inline const Movie& Rental::
-getMovie() const { return _movie; }
+
+inline std::ostream &Rental::applicateBonusAndCalculatePrice(std::ostream &result, int &frp, double &amount) {
+    _movie->incrementFrequentRenterPoint(frp);
+
+    return _movie->calculatePrice(result, amount, _daysRented);
+}
 
 #endif // RENTAL_H

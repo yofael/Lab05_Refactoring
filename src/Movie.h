@@ -1,38 +1,41 @@
 // Movie.h
 #ifndef MOVIE_H
 #define MOVIE_H
+
 #include <string>
+#include <sstream>
 
 class Movie {
 public:
-    static const int CHILDRENS   = 2;
-    static const int REGULAR     = 0;
-    static const int NEW_RELEASE = 1;
+    Movie(const std::string &);
 
-    Movie( const std::string& title, int priceCode = REGULAR );
+    Movie();
 
-    int getPriceCode() const;
-    void setPriceCode( int arg );
-    std::string getTitle() const;
+    virtual double incrementPrice(double &amount, int dayOfRental) const = 0;
+
+    virtual void incrementFrequentRenterPoint(int &frp) const;
+
+    std::ostream &calculatePrice(std::ostream &out, double &amount, int daysRental) const;
 
 private:
     std::string _title;
-    int _priceCode;
 };
 
 inline Movie::
-Movie( const std::string& title, int priceCode )
-        : _title( title )
-        , _priceCode( priceCode )
-{}
+Movie() {}
 
-inline int Movie::
-getPriceCode() const { return _priceCode; }
+inline Movie::
+Movie(const std::string &title)
+        : _title(title) {}
 
 inline void Movie::
-setPriceCode( int arg ) { _priceCode = arg; }
+incrementFrequentRenterPoint(int &frp) const {
+    ++frp;
+}
 
-inline std::string Movie::
-getTitle() const { return _title; }
+inline std::ostream &Movie::calculatePrice(std::ostream &out, double &amount, int daysRental) const {
+    out << "\t" << _title << "\t" << incrementPrice(amount, daysRental) << "\n";
+    return out;
+}
 
 #endif // MOVIE_H
